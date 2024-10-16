@@ -103,6 +103,7 @@ const questions = [
 let main = document.getElementsByTagName("main")[0]
 let domandaAttuale = 1
 let punteggio;
+let numDomande=1
 
 for (let i = 0; i < questions.length; i++) {
   let contenitoreDomanda = document.createElement("div")    // creazione div contenitore domanda
@@ -110,12 +111,13 @@ for (let i = 0; i < questions.length; i++) {
   contenitoreDomanda.id = "domanda" + [i]                   // assegnazione id
   contenitoreDomanda.style.display ="none"                  // assegnazione display none
 
-  let domanda = document.createElement("h1")
-  domanda.innerHTML = questions[i].question
+  let domanda = document.createElement("div")
+  domanda.className = "domanda"
+  domanda.innerHTML = "<h1>" + questions[i].question + "</h1>"
 
   let contatore = document.createElement("div")                                   // creazione contatore domanda
   contatore.id = "contatore"                                                      // assegnazione id
-  contatore.innerHTML = "<p>QUESTION "+ domandaAttuale +"<span> / 10<span><p>"
+  contatore.innerHTML = "<p>QUESTION "+ numDomande +"<span> / 10<span><p>"
 
   let contenitoreRisposte = document.createElement("div")   // creazione div contenitore risposte
   contenitoreRisposte.classList = "contenitoreRisposte"     // assegnazione id
@@ -135,22 +137,34 @@ for (let i = 0; i < questions.length; i++) {
     contenitoreRisposte.appendChild(risposta2)
   }
 
-  
 
   main.appendChild(contenitoreDomanda)
   contenitoreDomanda.appendChild(domanda)
   contenitoreDomanda.appendChild(contenitoreRisposte)
   contenitoreRisposte.appendChild(risposta1)
   contenitoreDomanda.appendChild(contatore)
+
+  numDomande++
 }
 
 
-function iniziaTest () {
+function iniziaTest () {                                                                                    // funzione tasto proceed
   punteggio = 0
-  domandaAttuale = 1
+  domandaCorrente = 0
 
   document.getElementById("testContainer").style.display = "none";
-  document.querySelector(".contenitoreDomanda#domanda0").style.display = "flex"
+  document.querySelector(".contenitoreDomanda#domanda" + domandaCorrente).style.display = "flex"
 }
 
 document.getElementById("iniziaTest").addEventListener("click", iniziaTest)
+
+
+
+document.querySelectorAll(".risposta").forEach(item => {                                                      // loop per aggiungere la funzione mostraDomanda a tutti i button risposta
+  item.addEventListener("click", mostraDomanda => {
+    document.querySelector(".contenitoreDomanda#domanda" + domandaCorrente).style.display = "none";           // nasconde domanda corrente
+    domandaCorrente++;                                                                                        // aggiorna contatore domanda corrente
+    document.querySelector(".contenitoreDomanda#domanda" + domandaCorrente).style.display = "flex";           // mostra domanda successiva
+  })
+
+})
