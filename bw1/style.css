@@ -1,0 +1,160 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#contenitore {
+    background-image: url("/bw1/assets/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1100px;
+    margin: auto;
+    margin-top: 80px;
+    height: 800px;
+}
+
+header {
+    display: flex;
+    gap: 30px;
+    padding: 60px;
+}
+
+#logo {
+    width: 150px;
+    padding-left: 50px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 150px;
+}
+
+#testContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+    gap: 50px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 16px;
+}
+
+#titolo {
+    display: flex;
+    width: 400px;
+}
+
+#titolo h1 {
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;;
+    font-style: normal;
+    font-size: 60px;
+}
+
+#instruction {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 550px;
+}
+
+#instruction h2 {
+    color:#d20094
+}
+
+#instruction2 ul {
+    padding-left: 20px;
+}
+
+#procedi {
+    display: flex;
+    align-items: center;
+    gap: 180px;
+}
+
+#checkbox {
+    display: flex;
+    gap: 10px;
+}
+
+#iniziaTest {
+    width: 200px;
+    height: 50px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#procedi input {
+    background-color: #00ffff;
+    border: #00ffff;
+    box-shadow: 2px 2px 50px #00ffff ;
+    cursor: pointer;
+}
+
+
+
+
+
+
+.contenitoreDomanda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    margin-top: 50px;
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;;
+    font-style: normal;
+}
+
+.contenitoreDomanda h1 {
+    color: white;
+    text-align: center;
+    font-size: 60px;    
+}
+
+.contenitoreRisposte {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 40px;
+    padding: 20px 30px;
+}
+
+.risposta {
+    width: 350px;
+    height: 70px;
+    border-radius: 50px;
+    font-size: large;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    background-color: transparent;
+    opacity: 4;
+    cursor: pointer;
+}
+
+#contatore {
+    display: flex;
+    margin-top: 100px;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 16px;
+    
+}
+
+#contatore span {
+    color: #d20094;
+}
