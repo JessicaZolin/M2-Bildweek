@@ -103,13 +103,13 @@ const questions = [
 let main = document.getElementsByTagName("main")[0]
 let domandaAttuale = 1
 let punteggio;
-let numDomande=1
+let questionNumber = 1
 
 for (let i = 0; i < questions.length; i++) {
   let contenitoreDomanda = document.createElement("div")    // creazione div contenitore domanda
   contenitoreDomanda.classList = "contenitoreDomanda"       // assegnazione class
   contenitoreDomanda.id = "domanda" + [i]                   // assegnazione id
-  contenitoreDomanda.style.display ="none"                  // assegnazione display none
+  contenitoreDomanda.style.display = "none"                  // assegnazione display none
 
   let domanda = document.createElement("div")
   domanda.className = "domanda"
@@ -117,7 +117,7 @@ for (let i = 0; i < questions.length; i++) {
 
   let contatore = document.createElement("div")                                   // creazione contatore domanda
   contatore.id = "contatore"                                                      // assegnazione id
-  contatore.innerHTML = "<p>QUESTION "+ numDomande +"<span> / 10<span><p>"
+  contatore.innerHTML = "<p>QUESTION " + questionNumber + "<span> / 10<span><p>"
 
   let contenitoreRisposte = document.createElement("div")   // creazione div contenitore risposte
   contenitoreRisposte.classList = "contenitoreRisposte"     // assegnazione id
@@ -137,19 +137,22 @@ for (let i = 0; i < questions.length; i++) {
     contenitoreRisposte.appendChild(risposta2)
   }
 
-
   main.appendChild(contenitoreDomanda)
   contenitoreDomanda.appendChild(domanda)
   contenitoreDomanda.appendChild(contenitoreRisposte)
   contenitoreRisposte.appendChild(risposta1)
   contenitoreDomanda.appendChild(contatore)
 
-  numDomande++
+  questionNumber++
 }
 
+let risultato = document.createElement("div")             // creazione div per risultati risposte
+risultato.id = "risultato"
+risultato.innerHTML = "<h1> complimenti hai ultimato il test e il tuo risultato è " + " / 10</h1>"
+risultato.style.display = "none"
+main.appendChild(risultato)
 
-function iniziaTest () {                                                                                    // funzione tasto proceed
-  punteggio = 0
+function iniziaTest() {                                                                                    // funzione tasto proceed
   domandaCorrente = 0
 
   document.getElementById("testContainer").style.display = "none";
@@ -164,7 +167,12 @@ document.querySelectorAll(".risposta").forEach(item => {                        
   item.addEventListener("click", mostraDomanda => {
     document.querySelector(".contenitoreDomanda#domanda" + domandaCorrente).style.display = "none";           // nasconde domanda corrente
     domandaCorrente++;                                                                                        // aggiorna contatore domanda corrente
-    document.querySelector(".contenitoreDomanda#domanda" + domandaCorrente).style.display = "flex";           // mostra domanda successiva
+
+    if (domandaCorrente < 10) {
+      document.querySelector(".contenitoreDomanda#domanda" + domandaCorrente).style.display = "flex";           // mostra domanda successiva
+    } else {
+      document.getElementById("risultato").style.display = "flex"
+    }
   })
 
 })
