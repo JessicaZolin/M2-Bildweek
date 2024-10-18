@@ -101,22 +101,35 @@ scoreDiv.classList = "finale"
 container.appendChild(scoreDiv)
 
 
+// -------- Funzione per iniziare il test dopo aver flaggato la checkbox, con collegamento al click del bottone
 
-function iniziaTest() {
-    domandaCorrente = 0
+let proceed = document.getElementById("iniziaTest")
 
-    document.getElementById("testContainer").style.display = "none";
-    document.getElementsByClassName("container")[0].style.display = "flex"
+proceed.onclick = function iniziaTest() {
+
+    // -------- seleziona elemento checkbox per poter effettuare controllo sulla spuntatura
+    let checkbox = document.getElementById("checkboxButton")
+    if (checkbox.checked === true) {
+
+        // -------- se vero nascondi pagina welcome e mostra prima domanda avviando funzione displayQuestion
+        document.getElementById("testContainer").style.display = "none";
+        document.getElementsByClassName("container")[0].style.display = "flex"  
+        displayQuestion ();
+    } else {
+
+        // -------- se falso stampa in HTML messaggio
+        const errore = document.createElement("div")
+        errore.innerHTML = "<p>per iniziare il test devi prima accettare le condizioni!!</p>"
+        errore.style.color = "red"
+        document.getElementById("testContainer").appendChild(errore)   
+    }
 }
 
-document.getElementById("iniziaTest").addEventListener("click", iniziaTest)
 
 
 // -------- Funzione per visualizzare la domanda attuale
 
 function displayQuestion() {
-    // Recupera il div del quiz usando l'ID 'quiz'
-    /* const quizDiv = document.getElementById('quiz'); */
 
     // -------- Pulisce il contenuto del div per visualizzare la nuova domanda
     quizDiv.innerHTML = '';
@@ -143,6 +156,8 @@ function displayQuestion() {
     // -------- Aggiunge la risposta corretta
     allAnswers.push(currentQuestion.correct_answer);
 
+    // -------- assortire a random l'arrayS
+    allAnswers.sort(() => Math.random() - 0.5);
 
     // -------- Aggiunge div per risposte al quiz
     const containerAnswer = document.createElement("div")
@@ -167,7 +182,7 @@ function displayQuestion() {
     }
 
 
-    
+
     // -------- Aggiunge div contatore al quiz
     const contatore = document.createElement("div")
     contatore.id = "contatore"
@@ -199,16 +214,11 @@ function handleAnswer(isCorrect) {
 
 // Funzione per visualizzare il punteggio finale
 function displayScore() {
-    // Recupera il div del quiz e lo pulisce
-    const quizDiv = document.getElementById('quiz');
+    // -------- Pulisce il contenuto del div per visualizzare la nuova domanda
     quizDiv.innerHTML = '';
-    // Recupera il div per il punteggio usando l'ID 'score'
-    const scoreDiv = document.getElementById('score');
     // Imposta il testo del punteggio finale
     scoreDiv.innerHTML = `Il tuo punteggio finale è di: <br> ${score} su ${questions.length}!`;
     // Rimuove la classe 'finale' (probabilmente per stilizzare il punteggio)
     scoreDiv.classList.remove('finale');
 }
 
-// Inizia il quiz visualizzando la prima domanda
-displayQuestion();
