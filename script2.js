@@ -103,39 +103,34 @@ container.appendChild(scoreDiv)
 
 // -------- Funzione per iniziare il test dopo aver flaggato la checkbox, con collegamento al click del bottone
 
-let proceed = document.getElementById("iniziaTest")
+const flag = document.getElementById("flag");
 
-proceed.onclick = function iniziaTest() {
+document.getElementById("iniziaTest").addEventListener("click", function () {
+        if (flag.checked) {
+            iniziaTest(); // Chiama la funzione con le parentesi
+        } else {
+            alert("Before you start the test, you must accept the conditions!!");
+        }
+    });
 
-    // -------- seleziona elemento checkbox per poter effettuare controllo sulla spuntatura
-    let checkbox = document.getElementById("checkboxButton")
-    if (checkbox.checked === true) {
-        // -------- se vero nascondi pagina welcome e mostra prima domanda avviando funzione displayQuestion
+    function iniziaTest() {
+        domandaCorrente = 0;
+    
         document.getElementById("testContainer").style.display = "none";
-        document.getElementsByClassName("container")[0].style.display = "flex"  
-        displayQuestion ();
-    } else {
-
-        // -------- se falso mostra in alert il messaggio
-        alert ("Before you start the test, you must accept the conditions!!")
+        document.getElementsByClassName("container")[0].style.display = "flex";
+        displayQuestion()
     }
-}
-
 
 
 // -------- Funzione per visualizzare la domanda attuale
 
 function displayQuestion() {
-
     // -------- Pulisce il contenuto del div per visualizzare la nuova domanda
     quizDiv.innerHTML = '';
-
     // -------- Ottiene la domanda corrente dall'array 'questions'
     const currentQuestion = questions[currentQuestionIndex];
-
     // -------- Crea un elemento h1 per la domanda
     const questionText = document.createElement('h1');
-
     // -------- Imposta il testo dell'elemento h1 con la domanda corrente
     questionText.innerText = currentQuestion.question;
     // -------- Aggiunge l'elemento h1 al div del quiz
@@ -151,10 +146,8 @@ function displayQuestion() {
     }
     // -------- Aggiunge la risposta corretta
     allAnswers.push(currentQuestion.correct_answer);
-
     // -------- assortire a random l'arrayS
     allAnswers.sort(() => Math.random() - 0.5);
-
     // -------- Aggiunge div per risposte al quiz
     const containerAnswer = document.createElement("div")
     containerAnswer.id = "containerAnswer"
@@ -206,7 +199,28 @@ function handleAnswer(isCorrect) {
         // --------- Altrimenti, mostra il punteggio finale
         displayScore();
     }
+    const tempoCorrente = Date.now();
+	const tempoRimanente = tempoFuturo - tempoCorrente;
+	const angolo = (tempoRimanente / tempoImpostato) * 360;
+	const secondi = sec * 1000; // Calcola il tempo in millisecondi
+	const inizio = Date.now(); // Ottieni il tempo attuale
+	tempoImpostato = secondi; // Imposta il tempo impostato
+	tempoFuturo = inizio + tempoImpostato; // Calcola il tempo futuro
+	domanda = setInterval(Countdown); // Avvia il countdown
+	if (angolo > 180) {
+		semicircle3.style.display = "none";
+		semicircle1.style.transform = "rotate(180deg)";
+		semicircle2.style.transform = `rotate(${angolo}deg)`;
+	} else {
+		semicircle3.style.display = "block";
+		semicircle1.style.transform = `rotate(${angolo}deg)`;
+		semicircle2.style.transform = `rotate(${angolo}deg)`;
+	}
+	if (showSec < 5) {
+		semicircle2.style.backgroundColor = "red";
+	}
 }
+
 
 // Funzione per visualizzare il punteggio finale
 function displayScore() {
@@ -216,5 +230,6 @@ function displayScore() {
     scoreDiv.innerHTML = `Il tuo punteggio finale è di: <br> ${score} su ${questions.length}!`;
     // Rimuove la classe 'finale' (probabilmente per stilizzare il punteggio)
     scoreDiv.classList.remove('finale');
+    mainContainer.style.display = "none";
 }
 
