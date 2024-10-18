@@ -110,18 +110,14 @@ proceed.onclick = function iniziaTest() {
     // -------- seleziona elemento checkbox per poter effettuare controllo sulla spuntatura
     let checkbox = document.getElementById("checkboxButton")
     if (checkbox.checked === true) {
-
         // -------- se vero nascondi pagina welcome e mostra prima domanda avviando funzione displayQuestion
         document.getElementById("testContainer").style.display = "none";
         document.getElementsByClassName("container")[0].style.display = "flex"  
         displayQuestion ();
     } else {
 
-        // -------- se falso stampa in HTML messaggio
-        const errore = document.createElement("div")
-        errore.innerHTML = "<p>per iniziare il test devi prima accettare le condizioni!!</p>"
-        errore.style.color = "red"
-        document.getElementById("testContainer").appendChild(errore)   
+        // -------- se falso mostra in alert il messaggio
+        alert ("Per iniziare il test devi prima accettare le condizioni!!")
     }
 }
 
