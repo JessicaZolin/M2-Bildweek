@@ -117,7 +117,7 @@ proceed.onclick = function iniziaTest() {
     } else {
 
         // -------- se falso mostra in alert il messaggio
-        alert ("Per iniziare il test devi prima accettare le condizioni!!")
+        alert ("Before you start the test, you must accept the conditions!!")
     }
 }
 
